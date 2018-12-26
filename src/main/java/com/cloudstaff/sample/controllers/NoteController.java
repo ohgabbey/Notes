@@ -17,10 +17,12 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    // idempotent
     @GetMapping("/notes")
-    public List<Note> viewAllNotes() {
-        return noteService.viewAllNotes();
+    public List<Note> viewNotes(@RequestParam(required = false) String[] tag) {
+        if(tag == null)
+            return noteService.viewAllNotes();
+        else
+            return noteService.findAllByTags(tag);
     }
 
     @PostMapping("/notes")
@@ -49,13 +51,13 @@ public class NoteController {
         return "Successfully delete note with ID: " + id + ".";
     }
 
-    @GetMapping("/notes/notes")
+/*    @GetMapping("/notes/notes")
     public List<Note> findNoteByTag(@RequestParam(required=false) String title, @RequestParam(required=false) String tag){
         if(!tag.isEmpty())
             noteToReturn = noteService.findAllByTag(tag);
         else if(!title.isEmpty())
             noteToReturn = noteService.findAllByTitle(title);
         return noteToReturn;
-    }
+    }*/
 
 }

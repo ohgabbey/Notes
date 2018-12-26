@@ -4,6 +4,7 @@ import com.cloudstaff.sample.persistence.NoteRepository;
 import com.cloudstaff.sample.persistence.Note;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,11 +23,16 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> findAllByTag(String tag) {
-        List<Note> allNotes = repository.findAll();
+    public List<Note> findAllByTags(String[] tag) {
+/*        List<Note> allNotes = repository.findAll();
         return allNotes.stream()
                 .filter(x -> x.getTags().contains(tag))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        List<Note> totalNotes = new ArrayList<>();
+        for(String s : tag) {
+            totalNotes.addAll(repository.findAll().stream().filter(x -> x.getTags().contains(s)).collect(Collectors.toList()));
+        }
+        return totalNotes;
     }
 
     @Override

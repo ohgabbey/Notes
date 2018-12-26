@@ -11,7 +11,7 @@ public interface NoteService {
     void deleteNoteById(Long id);
     void deleteAllNotes();
     List<Note> viewAllNotes();
-    List<Note> findAllByTag(String tag);
+    List<Note> findAllByTags(String[] tag);
     List<Note> findAllByTitle(String title);
 
 }
