@@ -5,7 +5,9 @@ import com.cloudstaff.sample.persistence.Note;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +25,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> findAllByTags(String[] tag) {
+    public Set<Note> findAllByTags(String[] tag) {
 /*        List<Note> allNotes = repository.findAll();
         return allNotes.stream()
                 .filter(x -> x.getTags().contains(tag))
@@ -32,7 +34,8 @@ public class NoteServiceImpl implements NoteService {
         for(String s : tag) {
             totalNotes.addAll(repository.findAll().stream().filter(x -> x.getTags().contains(s)).collect(Collectors.toList()));
         }
-        return totalNotes;
+        Set<Note> uniqueNotes = new HashSet<Note>(totalNotes);
+        return uniqueNotes;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.cloudstaff.sample.services;
 import com.cloudstaff.sample.persistence.Note;
 
 import java.util.List;
+import java.util.Set;
 
 public interface NoteService {
 
@@ -11,7 +12,7 @@ public interface NoteService {
     void deleteNoteById(Long id);
     void deleteAllNotes();
     List<Note> viewAllNotes();
-    List<Note> findAllByTags(String[] tag);
+    Set<Note> findAllByTags(String[] tag);
     List<Note> findAllByTitle(String title);
 
 }

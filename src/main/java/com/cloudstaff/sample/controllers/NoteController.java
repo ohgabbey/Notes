@@ -5,6 +5,7 @@ import com.cloudstaff.sample.services.NoteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -18,11 +19,8 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
-    public List<Note> viewNotes(@RequestParam(required = false) String[] tag) {
-        if(tag == null)
+    public List<Note> viewNotes() {
             return noteService.viewAllNotes();
-        else
-            return noteService.findAllByTags(tag);
     }
 
     @PostMapping("/notes")
@@ -49,6 +47,11 @@ public class NoteController {
     public String deleteNoteById(@RequestParam(required = true) Long id) {
         noteService.deleteNoteById(id);
         return "Successfully delete note with ID: " + id + ".";
+    }
+
+    @GetMapping("/notes/tag")
+    public Set<Note> viewNotes(@RequestParam String[] tag) {
+            return noteService.findAllByTags(tag);
     }
 
 /*    @GetMapping("/notes/notes")
